@@ -1,0 +1,44 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>User Management</h1>
+    <button class="btn-primary" (click)="createUser()">+ Create Staff User</button>
+  </div>
+
+  <div class="loading" *ngIf="loading">Loading users...</div>
+
+  <div class="table-card" *ngIf="!loading">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th>Created</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let u of users">
+          <td>{{ u.id }}</td>
+          <td>{{ u.username }}</td>
+          <td>{{ u.email }}</td>
+          <td><span class="badge" [class.admin]="u.role === 'ADMIN'">{{ u.role }}</span></td>
+          <td>
+            <span class="badge" [class.active]="u.enabled" [class.inactive]="!u.enabled">
+              {{ u.enabled ? 'Active' : 'Disabled' }}
+            </span>
+          </td>
+          <td>{{ u.createdAt | date:'mediumDate' }}</td>
+          <td class="actions">
+            <button class="btn-sm btn-danger" *ngIf="u.role !== 'ADMIN'" (click)="deleteUser(u.id)">Delete</button>
+          </td>
+        </tr>
+        <tr *ngIf="users.length === 0">
+          <td colspan="7" class="empty-msg">No users found.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

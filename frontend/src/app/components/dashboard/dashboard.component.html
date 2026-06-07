@@ -1,0 +1,58 @@
+<div class="dashboard">
+  <h1 class="page-title">Dashboard</h1>
+
+  <div class="loading" *ngIf="loading">Loading dashboard data...</div>
+
+  <div class="stats-grid" *ngIf="data">
+    <div class="stat-card">
+      <div class="stat-icon savings-icon">&#9679;</div>
+      <div class="stat-info">
+        <span class="stat-value">{{ data.totalSavings | currency:'INR':'symbol':'1.0-0' }}</span>
+        <span class="stat-label">Total Savings</span>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon loans-icon">&#9679;</div>
+      <div class="stat-info">
+        <span class="stat-value">{{ data.totalLoans }}</span>
+        <span class="stat-label">Active Loans</span>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon amount-icon">&#9679;</div>
+      <div class="stat-info">
+        <span class="stat-value">{{ data.totalLoanAmount | currency:'INR':'symbol':'1.0-0' }}</span>
+        <span class="stat-label">Total Loan Amount</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="recent-section" *ngIf="data?.recentTransactions?.length">
+    <h2>Recent Transactions</h2>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Date</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let t of data!.recentTransactions">
+          <td>{{ t.id }}</td>
+          <td><span class="badge" [class.badge-deposit]="t.type === 'DEPOSIT'" [class.badge-withdrawal]="t.type === 'WITHDRAWAL'">{{ t.type }}</span></td>
+          <td>{{ t.amount | currency:'INR' }}</td>
+          <td>{{ t.transactionDate | date:'mediumDate' }}</td>
+          <td>{{ t.description }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="charts-placeholder" *ngIf="data">
+    <div class="chart-box">Chart: Members Overview (placeholder)</div>
+    <div class="chart-box">Chart: Financial Summary (placeholder)</div>
+  </div>
+</div>

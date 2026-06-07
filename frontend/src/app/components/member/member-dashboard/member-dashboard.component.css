@@ -1,0 +1,219 @@
+.dashboard-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.welcome-card {
+  background: linear-gradient(135deg, #1a2332 0%, #2c3e50 100%);
+  color: #fff;
+  padding: 28px 32px;
+  border-radius: 10px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.welcome-info h1 {
+  margin: 0 0 8px;
+  font-size: 24px;
+}
+
+.member-id {
+  margin: 0 0 4px;
+  font-size: 14px;
+  color: #8395a7;
+}
+
+.member-status {
+  margin: 0;
+  font-size: 13px;
+  color: #f39c12;
+}
+
+.member-status.active {
+  color: #2ecc71;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border-left: 4px solid #3498db;
+}
+
+.stat-card.savings-card {
+  border-left-color: #2ecc71;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: #8395a7;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2ecc71;
+}
+
+.stat-value.blue {
+  color: #3498db;
+}
+
+.stat-value.orange {
+  color: #f39c12;
+}
+
+.quick-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.action-btn {
+  padding: 10px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.action-btn.deposit {
+  background: #2ecc71;
+  color: #fff;
+}
+
+.action-btn.deposit:hover {
+  background: #27ae60;
+}
+
+.action-btn.withdraw {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.action-btn.withdraw:hover {
+  background: #c0392b;
+}
+
+.action-btn.loan {
+  background: #3498db;
+  color: #fff;
+}
+
+.action-btn.loan:hover {
+  background: #2980b9;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 16px;
+  color: #2c3e50;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 13px;
+}
+
+.table th {
+  background: #f8f9fa;
+  color: #7f8c8d;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+.table td {
+  border-bottom: 1px solid #ecf0f1;
+  color: #2c3e50;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  background: #ecf0f1;
+  color: #7f8c8d;
+}
+
+.badge.deposit {
+  background: #d5f5e3;
+  color: #27ae60;
+}
+
+.badge.withdraw {
+  background: #fadbd8;
+  color: #e74c3c;
+}
+
+.badge.active {
+  background: #d6eaf8;
+  color: #2980b9;
+}
+
+.empty-state {
+  padding: 40px;
+  text-align: center;
+  color: #95a5a6;
+  font-size: 14px;
+}
+
+.loading, .error {
+  padding: 40px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.error {
+  color: #e74c3c;
+}
+
+@media (max-width: 768px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

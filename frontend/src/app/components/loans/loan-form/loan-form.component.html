@@ -1,0 +1,46 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>Apply for Loan</h1>
+    <a routerLink="/loans" class="btn-outline">Back to Loans</a>
+  </div>
+
+  <div class="form-card">
+    <form (ngSubmit)="onSubmit()" #loanForm="ngForm">
+      <div class="form-group">
+        <label for="memberId">Member *</label>
+        <select id="memberId" name="memberId" [(ngModel)]="data.memberId" required>
+          <option [ngValue]="0">-- Select a member --</option>
+          <option *ngFor="let m of members" [ngValue]="m.id">{{ m.firstName }} {{ m.lastName }}</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="amount">Loan Amount *</label>
+          <input id="amount" name="amount" type="number" [(ngModel)]="data.amount" required min="1" placeholder="Enter amount" />
+        </div>
+        <div class="form-group">
+          <label for="interestRate">Interest Rate (%) *</label>
+          <input id="interestRate" name="interestRate" type="number" [(ngModel)]="data.interestRate" required min="0" step="0.1" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="tenureMonths">Duration (months) *</label>
+          <input id="tenureMonths" name="tenureMonths" type="number" [(ngModel)]="data.tenureMonths" required min="1" />
+        </div>
+      </div>
+
+      <div class="form-error" *ngIf="error">{{ error }}</div>
+      <div class="form-success" *ngIf="success">{{ success }}</div>
+
+      <div class="form-actions">
+        <a routerLink="/loans" class="btn-cancel">Cancel</a>
+        <button type="submit" class="btn-primary" [disabled]="loading">
+          {{ loading ? 'Submitting...' : 'Apply for Loan' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

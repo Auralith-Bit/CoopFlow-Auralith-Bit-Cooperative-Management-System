@@ -1,0 +1,53 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>Savings</h1>
+    <a routerLink="/savings/new" class="btn-primary">+ New Transaction</a>
+  </div>
+
+  <div class="filter-card">
+    <div class="form-group">
+      <label for="memberSelect">Select Member</label>
+      <select id="memberSelect" [(ngModel)]="selectedMemberId" (change)="loadData()">
+        <option [ngValue]="null">-- Select a member --</option>
+        <option *ngFor="let m of members" [ngValue]="m.id">{{ m.firstName }} {{ m.lastName }}</option>
+      </select>
+    </div>
+    <div class="balance-display" *ngIf="balance !== null">
+      <span class="balance-label">Current Balance:</span>
+      <span class="balance-value">{{ balance | currency:'INR' }}</span>
+    </div>
+  </div>
+
+  <div class="loading" *ngIf="loading">Loading savings data...</div>
+
+  <div class="table-card" *ngIf="!loading && transactions.length">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Date</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let t of transactions">
+          <td>{{ t.id }}</td>
+          <td><span class="badge" [class.deposit]="t.type === 'DEPOSIT'" [class.withdrawal]="t.type === 'WITHDRAWAL'">{{ t.type }}</span></td>
+          <td>{{ t.amount | currency:'INR' }}</td>
+          <td>{{ t.transactionDate | date:'mediumDate' }}</td>
+          <td>{{ t.description }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="empty-msg" *ngIf="!loading && selectedMemberId && transactions.length === 0">
+    No savings transactions for this member.
+  </div>
+
+  <div class="empty-msg" *ngIf="!selectedMemberId">
+    Select a member to view their savings history.
+  </div>
+</div>

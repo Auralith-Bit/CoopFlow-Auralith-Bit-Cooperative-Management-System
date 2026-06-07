@@ -1,0 +1,13 @@
+<header class="header">
+  <div class="header-left">
+    <span class="page-title"></span>
+  </div>
+  <div class="header-right">
+    <span class="user-info">
+      <span class="user-icon">&#9787;</span>
+      {{ authService.getUsername() }}
+      <span class="role-badge">{{ authService.getRole() }}</span>
+    </span>
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+</header>

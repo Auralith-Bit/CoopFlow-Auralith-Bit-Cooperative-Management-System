@@ -1,0 +1,71 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>Loan Details</h1>
+    <a routerLink="/loans" class="btn-outline">Back to Loans</a>
+  </div>
+
+  <div class="loading" *ngIf="loading">Loading loan details...</div>
+
+  <div class="detail-card" *ngIf="loan && !loading">
+    <div class="detail-grid">
+      <div class="detail-item">
+        <span class="detail-label">Loan ID</span>
+        <span class="detail-value">{{ loan.id }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Member</span>
+        <span class="detail-value">{{ loan.memberName || 'Member #' + loan.memberId }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Amount</span>
+        <span class="detail-value">{{ loan.amount | currency:'INR' }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Interest Rate</span>
+        <span class="detail-value">{{ loan.interestRate }}%</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Duration</span>
+        <span class="detail-value">{{ loan.tenureMonths }} months</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Status</span>
+        <span class="detail-value">
+          <span class="badge" [class.pending]="loan.status === 'PENDING'" [class.approved]="loan.status === 'APPROVED'" [class.rejected]="loan.status === 'REJECTED'" [class.paid]="loan.status === 'PAID'">
+            {{ loan.status }}
+          </span>
+        </span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Applied Date</span>
+        <span class="detail-value">{{ loan.appliedDate | date:'mediumDate' }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Approved Date</span>
+        <span class="detail-value">{{ loan.approvedDate ? (loan.approvedDate | date:'mediumDate') : '-' }}</span>
+      </div>
+      <div class="detail-item full-width">
+        <span class="detail-label">Notes</span>
+        <span class="detail-value">{{ loan.notes || '-' }}</span>
+      </div>
+    </div>
+
+    <div class="detail-actions" *ngIf="loan.status === 'PENDING'">
+      <button class="btn-success" (click)="approveLoan()">Approve Loan</button>
+    </div>
+
+    <div class="payment-section" *ngIf="loan.status === 'APPROVED'">
+      <h3>Make a Payment</h3>
+      <div class="payment-form">
+        <div class="form-group">
+          <label for="paymentAmount">Payment Amount</label>
+          <input id="paymentAmount" type="number" [(ngModel)]="paymentAmount" min="1" placeholder="Enter payment amount" />
+        </div>
+        <button class="btn-primary" (click)="makePayment()">Submit Payment</button>
+      </div>
+    </div>
+
+    <div class="form-error" *ngIf="error">{{ error }}</div>
+    <div class="form-success" *ngIf="success">{{ success }}</div>
+  </div>
+</div>

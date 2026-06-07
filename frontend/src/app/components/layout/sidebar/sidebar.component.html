@@ -1,0 +1,60 @@
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h2>CMS</h2>
+    <p>Cooperative Mgmt</p>
+  </div>
+  <nav class="sidebar-nav">
+    <ng-container *ngIf="authService.getRole() === 'MEMBER'">
+      <a routerLink="/member/dashboard" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">&#9679;</span>
+        <span>Dashboard</span>
+      </a>
+      <a routerLink="/member/passbook" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">&#9679;</span>
+        <span>Passbook</span>
+      </a>
+      <a routerLink="/member/savings" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">&#9679;</span>
+        <span>Savings</span>
+      </a>
+      <a routerLink="/member/loans" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">&#9679;</span>
+        <span>My Loans</span>
+      </a>
+      <a routerLink="/member/loans/apply" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">&#9679;</span>
+        <span>Apply for Loan</span>
+      </a>
+    </ng-container>
+    <ng-container *ngIf="authService.getRole() !== 'MEMBER'">
+      <a routerLink="/dashboard" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">&#9679;</span>
+        <span>Dashboard</span>
+      </a>
+      <a routerLink="/members" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">&#9679;</span>
+        <span>Members</span>
+      </a>
+      <a routerLink="/savings" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">&#9679;</span>
+        <span>Savings</span>
+      </a>
+      <a routerLink="/loans" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">&#9679;</span>
+        <span>Loans</span>
+      </a>
+      <a routerLink="/transactions" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">&#9679;</span>
+        <span>Transactions</span>
+      </a>
+      <a *ngIf="authService.getRole() === 'ADMIN'" routerLink="/admin/users" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">&#9679;</span>
+        <span>Users</span>
+      </a>
+      <a *ngIf="authService.getRole() === 'ADMIN' || authService.getRole() === 'MANAGER'" routerLink="/admin/member-approval" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">&#9679;</span>
+        <span>Member Approvals</span>
+      </a>
+    </ng-container>
+  </nav>
+</aside>

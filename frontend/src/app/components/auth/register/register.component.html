@@ -1,0 +1,67 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h2>Create Account</h2>
+      <p>Register for Cooperative Management System</p>
+    </div>
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm" class="auth-form">
+
+      <div class="form-section-title">Personal Details</div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">First Name *</label>
+          <input id="firstName" name="firstName" type="text" [(ngModel)]="data.firstName" required placeholder="First name" />
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name *</label>
+          <input id="lastName" name="lastName" type="text" [(ngModel)]="data.lastName" required placeholder="Last name" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input id="email" name="email" type="email" [(ngModel)]="data.email" required placeholder="Enter email" />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone *</label>
+          <input id="phone" name="phone" type="text" [(ngModel)]="data.phone" required placeholder="Enter phone number" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="address">Address</label>
+        <textarea id="address" name="address" [(ngModel)]="data.address" placeholder="Enter address" rows="2"></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="city">City</label>
+          <input id="city" name="city" type="text" [(ngModel)]="data.city" placeholder="City" />
+        </div>
+        <div class="form-group">
+          <label for="state">State</label>
+          <input id="state" name="state" type="text" [(ngModel)]="data.state" placeholder="State" />
+        </div>
+        <div class="form-group">
+          <label for="zipCode">ZIP Code</label>
+          <input id="zipCode" name="zipCode" type="text" [(ngModel)]="data.zipCode" placeholder="ZIP Code" />
+        </div>
+      </div>
+
+      <div class="form-section-title">Security</div>
+
+      <div class="form-group">
+        <label for="password">Password *</label>
+        <input id="password" name="password" type="password" [(ngModel)]="data.password" required placeholder="Create a password (min 6 characters)" />
+      </div>
+
+      <div class="form-error" *ngIf="error">{{ error }}</div>
+      <div class="form-success" *ngIf="success">{{ success }}</div>
+      <button type="submit" class="btn-primary" [disabled]="loading">
+        {{ loading ? 'Registering...' : 'Register' }}
+      </button>
+    </form>
+    <div class="auth-footer">
+      Already have an account? <a routerLink="/login">Sign in</a>
+    </div>
+  </div>
+</div>

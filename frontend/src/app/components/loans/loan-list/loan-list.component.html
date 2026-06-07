@@ -1,0 +1,47 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>Loans</h1>
+    <a routerLink="/loans/new" class="btn-primary">+ Apply for Loan</a>
+  </div>
+
+  <div class="loading" *ngIf="loading">Loading loans...</div>
+
+  <div class="table-card" *ngIf="!loading">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Member</th>
+          <th>Amount</th>
+          <th>Interest</th>
+          <th>Duration</th>
+          <th>Status</th>
+          <th>Applied</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let l of loans">
+          <td>{{ l.id }}</td>
+          <td>{{ l.memberName || 'Member #' + l.memberId }}</td>
+          <td>{{ l.amount | currency:'INR' }}</td>
+          <td>{{ l.interestRate }}%</td>
+          <td>{{ l.tenureMonths }} months</td>
+          <td>
+            <span class="badge" [class.pending]="l.status === 'PENDING'" [class.approved]="l.status === 'APPROVED'" [class.rejected]="l.status === 'REJECTED'" [class.paid]="l.status === 'PAID'">
+              {{ l.status }}
+            </span>
+          </td>
+          <td>{{ l.appliedDate | date:'mediumDate' }}</td>
+          <td class="actions">
+            <button class="btn-sm btn-outline" (click)="viewLoan(l.id)">View</button>
+            <button class="btn-sm btn-success" *ngIf="l.status === 'PENDING'" (click)="approveLoan(l.id)">Approve</button>
+          </td>
+        </tr>
+        <tr *ngIf="loans.length === 0">
+          <td colspan="8" class="empty-msg">No loans found.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

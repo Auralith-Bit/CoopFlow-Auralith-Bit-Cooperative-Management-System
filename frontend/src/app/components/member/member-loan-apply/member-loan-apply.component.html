@@ -1,0 +1,53 @@
+<div class="apply-container">
+  <div class="page-header">
+    <h1>Apply for Loan</h1>
+    <a routerLink="/member/loans" class="back-link">Back to My Loans</a>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="alert success" *ngIf="success">{{ success }}</div>
+      <div class="alert error" *ngIf="error">{{ error }}</div>
+
+      <form (ngSubmit)="onSubmit()" #loanForm="ngForm">
+        <div class="form-group">
+          <label for="amount">Loan Amount (₹)</label>
+          <input type="number" id="amount" name="amount" [(ngModel)]="loanData.amount"
+                 required min="1" placeholder="Enter loan amount" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="interestRate">Interest Rate (%)</label>
+          <input type="number" id="interestRate" name="interestRate" [(ngModel)]="loanData.interestRate"
+                 readonly class="form-control readonly" />
+          <small class="form-text">Suggested rate: 10% per annum</small>
+        </div>
+
+        <div class="form-group">
+          <label for="tenureMonths">Tenure (Months)</label>
+          <input type="number" id="tenureMonths" name="tenureMonths" [(ngModel)]="loanData.tenureMonths"
+                 required min="1" max="120" placeholder="Enter tenure in months" class="form-control" />
+        </div>
+
+        <div class="emi-preview" *ngIf="emi > 0">
+          <div class="emi-item">
+            <span class="emi-label">Monthly EMI</span>
+            <span class="emi-value">₹{{ emi | number:'1.2-2' }}</span>
+          </div>
+          <div class="emi-item">
+            <span class="emi-label">Total Payable</span>
+            <span class="emi-value">₹{{ totalPayable | number:'1.2-2' }}</span>
+          </div>
+          <div class="emi-item">
+            <span class="emi-label">Total Interest</span>
+            <span class="emi-value">₹{{ (totalPayable - (loanData.amount || 0)) | number:'1.2-2' }}</span>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn" [disabled]="submitting || !loanForm.form.valid">
+          {{ submitting ? 'Submitting...' : 'Submit Application' }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

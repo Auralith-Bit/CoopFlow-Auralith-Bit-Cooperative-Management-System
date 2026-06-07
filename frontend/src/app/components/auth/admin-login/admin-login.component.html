@@ -1,0 +1,24 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="auth-role-badge admin">Admin</div>
+      <h2>Admin Login</h2>
+      <p>Authorized personnel only</p>
+    </div>
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="auth-form">
+      <div class="form-group">
+        <label for="staffId">Admin ID or Username</label>
+        <input id="staffId" name="staffId" type="text" [(ngModel)]="data.staffId" required placeholder="Enter Admin ID or Username" />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" [(ngModel)]="data.password" required placeholder="Enter your password" />
+      </div>
+      <div class="form-error" *ngIf="error">{{ error }}</div>
+      <button type="submit" class="btn-primary" [disabled]="loading">
+        {{ loading ? 'Signing in...' : 'Sign In' }}
+      </button>
+    </form>
+
+  </div>
+</div>

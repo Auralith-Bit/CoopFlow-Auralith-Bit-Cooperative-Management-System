@@ -1,0 +1,41 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>Members</h1>
+    <a routerLink="/members/new" class="btn-primary">+ Add Member</a>
+  </div>
+
+  <div class="loading" *ngIf="loading">Loading members...</div>
+
+  <div class="table-card" *ngIf="!loading">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Status</th>
+          <th>Member Since</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let m of members">
+          <td>{{ m.id }}</td>
+          <td>{{ m.firstName }} {{ m.lastName }}</td>
+          <td>{{ m.email }}</td>
+          <td>{{ m.phone }}</td>
+          <td><span class="badge" [class.active]="m.status === 'ACTIVE'" [class.inactive]="m.status === 'INACTIVE'">{{ m.status }}</span></td>
+          <td>{{ m.joinDate | date:'mediumDate' }}</td>
+          <td class="actions">
+            <button class="btn-sm btn-outline" (click)="editMember(m.id)">Edit</button>
+            <button class="btn-sm btn-danger" (click)="deleteMember(m.id)">Delete</button>
+          </td>
+        </tr>
+        <tr *ngIf="members.length === 0">
+          <td colspan="7" class="empty-msg">No members found. Click "+ Add Member" to create one.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

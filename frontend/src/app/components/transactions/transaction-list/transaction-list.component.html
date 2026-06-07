@@ -1,0 +1,49 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>Transactions</h1>
+    <a routerLink="/transactions/new" class="btn-primary">+ New Transaction</a>
+  </div>
+
+  <div class="filter-card">
+    <div class="form-group">
+      <label for="startDate">Start Date</label>
+      <input id="startDate" type="date" [(ngModel)]="startDate" />
+    </div>
+    <div class="form-group">
+      <label for="endDate">End Date</label>
+      <input id="endDate" type="date" [(ngModel)]="endDate" />
+    </div>
+    <button class="btn-outline btn-sm" (click)="filterByDate()">Filter</button>
+    <button class="btn-ghost btn-sm" (click)="clearFilter()">Clear</button>
+  </div>
+
+  <div class="loading" *ngIf="loading">Loading transactions...</div>
+
+  <div class="table-card" *ngIf="!loading">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Member ID</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Date</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let t of filteredTransactions">
+          <td>{{ t.id }}</td>
+          <td>{{ t.memberId }}</td>
+          <td><span class="badge" [class.credit]="t.type === 'CREDIT' || t.type === 'DEPOSIT'" [class.debit]="t.type === 'DEBIT' || t.type === 'WITHDRAWAL'">{{ t.type }}</span></td>
+          <td>{{ t.amount | currency:'INR' }}</td>
+          <td>{{ t.transactionDate | date:'mediumDate' }}</td>
+          <td>{{ t.description }}</td>
+        </tr>
+        <tr *ngIf="filteredTransactions.length === 0">
+          <td colspan="6" class="empty-msg">No transactions found.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

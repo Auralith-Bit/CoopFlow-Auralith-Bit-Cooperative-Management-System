@@ -1,0 +1,69 @@
+<div class="passbook-container" *ngIf="!loading">
+  <div class="balance-card">
+    <div class="balance-label">Current Balance</div>
+    <div class="balance-value">₹{{ balance | number:'1.2-2' }}</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2>Transaction History</h2>
+    </div>
+
+    <div class="filters">
+      <div class="filter-group">
+        <label>Type</label>
+        <select [(ngModel)]="filterType" (change)="applyFilter()">
+          <option value="">All</option>
+          <option value="DEPOSIT">Deposit</option>
+          <option value="WITHDRAWAL">Withdrawal</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>From</label>
+        <input type="date" [(ngModel)]="filterDateFrom" (change)="applyFilter()" />
+      </div>
+      <div class="filter-group">
+        <label>To</label>
+        <input type="date" [(ngModel)]="filterDateTo" (change)="applyFilter()" />
+      </div>
+      <button class="clear-btn" (click)="clearFilters()">Clear</button>
+    </div>
+
+    <table class="table" *ngIf="filteredTransactions.length > 0">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Date</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Balance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let txn of filteredTransactions; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ txn.transactionDate | date:'mediumDate' }}</td>
+          <td>
+            <span class="badge" [class.deposit]="txn.type === 'DEPOSIT'"
+                  [class.withdrawal]="txn.type === 'WITHDRAWAL'">
+              {{ txn.type }}
+            </span>
+          </td>
+          <td>{{ txn.description || '-' }}</td>
+          <td [class.credit]="txn.type === 'DEPOSIT'"
+              [class.debit]="txn.type === 'WITHDRAWAL'">
+            {{ txn.type === 'DEPOSIT' ? '+' : '-' }}₹{{ txn.amount | number:'1.2-2' }}
+          </td>
+          <td>₹{{ txn.balanceAfter | number:'1.2-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="empty-state" *ngIf="filteredTransactions.length === 0">
+      No transactions found
+    </div>
+  </div>
+</div>
+
+<div class="loading" *ngIf="loading">Loading passbook...</div>
+<div class="error" *ngIf="error">{{ error }}</div>

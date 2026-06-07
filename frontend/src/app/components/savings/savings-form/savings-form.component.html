@@ -1,0 +1,52 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>New Savings Transaction</h1>
+    <a routerLink="/savings" class="btn-outline">Back to Savings</a>
+  </div>
+
+  <div class="form-card">
+    <form (ngSubmit)="onSubmit()" #savingsForm="ngForm">
+      <div class="form-group">
+        <label for="memberId">Member *</label>
+        <select id="memberId" name="memberId" [(ngModel)]="data.memberId" required>
+          <option [ngValue]="0">-- Select a member --</option>
+          <option *ngFor="let m of members" [ngValue]="m.id">{{ m.firstName }} {{ m.lastName }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Transaction Type</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="type" [value]="'DEPOSIT'" [(ngModel)]="transactionType" />
+            Deposit
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="type" [value]="'WITHDRAWAL'" [(ngModel)]="transactionType" />
+            Withdrawal
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="amount">Amount *</label>
+        <input id="amount" name="amount" type="number" [(ngModel)]="data.amount" required min="1" placeholder="Enter amount" />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" [(ngModel)]="data.description" placeholder="Optional description" rows="3"></textarea>
+      </div>
+
+      <div class="form-error" *ngIf="error">{{ error }}</div>
+      <div class="form-success" *ngIf="success">{{ success }}</div>
+
+      <div class="form-actions">
+        <a routerLink="/savings" class="btn-cancel">Cancel</a>
+        <button type="submit" class="btn-primary" [disabled]="loading">
+          {{ loading ? 'Processing...' : 'Submit' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

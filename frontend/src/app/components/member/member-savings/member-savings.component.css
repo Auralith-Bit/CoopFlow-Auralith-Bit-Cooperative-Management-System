@@ -1,0 +1,153 @@
+.savings-container {
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.balance-card {
+  background: linear-gradient(135deg, #1a2332 0%, #2c3e50 100%);
+  color: #fff;
+  padding: 28px 32px;
+  border-radius: 10px;
+  margin-bottom: 24px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.balance-label {
+  font-size: 14px;
+  color: #8395a7;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.balance-value {
+  font-size: 36px;
+  font-weight: 700;
+  color: #2ecc71;
+}
+
+.forms-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 16px;
+  color: #2c3e50;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.alert {
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+
+.alert.success {
+  background: #d5f5e3;
+  color: #27ae60;
+  border: 1px solid #a3e4bc;
+}
+
+.alert.error {
+  background: #fadbd8;
+  color: #e74c3c;
+  border: 1px solid #f1948a;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 6px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #dcdde1;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52,152,219,0.15);
+}
+
+.action-btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  color: #fff;
+}
+
+.action-btn:disabled {
+  background: #bdc3c7 !important;
+  cursor: not-allowed;
+}
+
+.deposit-btn {
+  background: #2ecc71;
+}
+
+.deposit-btn:hover:not(:disabled) {
+  background: #27ae60;
+}
+
+.withdraw-btn {
+  background: #e74c3c;
+}
+
+.withdraw-btn:hover:not(:disabled) {
+  background: #c0392b;
+}
+
+.loading, .error {
+  padding: 40px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.error {
+  color: #e74c3c;
+}
+
+@media (max-width: 768px) {
+  .forms-grid {
+    grid-template-columns: 1fr;
+  }
+}
