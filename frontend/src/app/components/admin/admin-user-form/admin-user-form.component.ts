@@ -23,8 +23,8 @@ export class AdminUserFormComponent {
     this.loading = true;
     this.error = '';
     this.adminService.createUser(this.data).subscribe({
-      next: () => {
-        this.success = 'User created successfully!';
+      next: (res) => {
+        this.success = `User created successfully! Staff ID: ${res.staffId}`;
         this.loading = false;
         setTimeout(() => this.router.navigate(['/admin/users']), 1500);
       },

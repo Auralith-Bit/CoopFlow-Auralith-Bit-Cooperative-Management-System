@@ -11,6 +11,7 @@
       <thead>
         <tr>
           <th>ID</th>
+          <th>Staff ID</th>
           <th>Username</th>
           <th>Email</th>
           <th>Role</th>
@@ -22,6 +23,7 @@
       <tbody>
         <tr *ngFor="let u of users">
           <td>{{ u.id }}</td>
+          <td><strong>{{ u.staffId || '-' }}</strong></td>
           <td>{{ u.username }}</td>
           <td>{{ u.email }}</td>
           <td><span class="badge" [class.admin]="u.role === 'ADMIN'">{{ u.role }}</span></td>
@@ -36,7 +38,7 @@
           </td>
         </tr>
         <tr *ngIf="users.length === 0">
-          <td colspan="7" class="empty-msg">No users found.</td>
+          <td colspan="8" class="empty-msg">No users found.</td>
         </tr>
       </tbody>
     </table>

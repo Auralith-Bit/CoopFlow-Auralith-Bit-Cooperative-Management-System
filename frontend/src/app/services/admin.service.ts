@@ -7,6 +7,7 @@ import { Member } from '../models/member.model';
 export interface AppUser {
   id: number;
   username: string;
+  staffId?: string;
   email: string;
   role: string;
   enabled: boolean;
